@@ -9,18 +9,16 @@ app.controller('calculateController', function($scope, $http) {
     // bind data to result input text and the first number input hidden text
     $scope.addNumber = function(num) {
         $scope.calculateResult = $scope.calculateResult ? $scope.calculateResult  + num : num;
-        if ($scope.calculateDone) {
+        if ($scope.calculateDone) { // if the calculation has been done remove and add num to result text. clean all others field
             $scope.calculateResult = num;
             $scope.calculateNumber1 = num;
             $scope.calculateNumber2 = null;
             $scope.calculateSymbolText = null;
             $scope.calculateDone = null;
-        } else if ($scope.calculateSymbolText == undefined) {
+        } else if ($scope.calculateSymbolText == undefined) { // if the symbol (+, -, x) hasn't been click
             $scope.calculateNumber1 = $scope.calculateNumber1 ? $scope.calculateNumber1 + num : num;
-            console.log($scope.calculateResult);
-        } else {
+        } else { // other wise add numbers to secondNumber field
             $scope.calculateNumber2 = $scope.calculateNumber2 ? $scope.calculateNumber2 + num : num;
-            console.log($scope.calculateNumber2);
         }
     };
 
@@ -37,7 +35,7 @@ app.controller('calculateController', function($scope, $http) {
     $scope.delNumber = function() {
         console.log('number');
         var calResult = $scope.calculateResult;
-        if ($scope.calculateDone) {
+        if ($scope.calculateDone) { // if this calculation has been done clear all data.
             $scope.calculateResult = null;
             $scope.calculateNumber1 = null;
             $scope.calculateNumber2 = null;
@@ -55,7 +53,7 @@ app.controller('calculateController', function($scope, $http) {
         }
     };
 
-    // caculate
+    // caculate ajax
     $scope.calculate = function() {
         console.log($scope.calculateNumber1);
         $http.post('/api/calculateAll',

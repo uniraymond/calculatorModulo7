@@ -38,8 +38,8 @@ class CalculateController extends Controller
       default:
         $result = $num1;
     }
-    $r = array('firstNum'=>$request->input('firstNumber'), 'sndNum'=>Input::get('secondNumber'), 'sym'=>$sym, 'result'=>$result);
-    echo json_encode($r);
-//    echo json_encode($result);
+    
+    return response()->json(['result'=>$result]);
   }
+
 }
